@@ -1,6 +1,7 @@
 package com.example.producer.Kafka;
 
 import DTO.Data;
+import Model.Hamster;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -22,7 +23,7 @@ public class KafkaProducerConfig {
     private String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, Data> producerFactory() {
+    public ProducerFactory<String, Hamster> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -32,7 +33,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, Data> kafkaTemplate() {
+    public KafkaTemplate<String, Hamster> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

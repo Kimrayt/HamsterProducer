@@ -3,6 +3,7 @@ package com.example.producer;
 import DTO.Data;
 import DTO.Datum;
 import DTO.Name;
+import Model.Hamster;
 import com.example.producer.Kafka.MessageProducer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,18 +23,11 @@ public class ProducerApplication {
         MessageProducer producer = context.getBean(MessageProducer.class);
         ApiService service = context.getBean(ApiServiceImpl.class);
 
-        service.getData(10).forEach(producer::sendMessage);
-        Data test = new Data();
-        List<Datum> test1 = new ArrayList<>();
-        Datum a = new Datum();
-        a.setId("1");
-        Name b = new Name();
-        b.setFirst("Thomas");
-        b.setTitle("Theodore");
-        b.setLast("Blackwood");
-        a.setName(b);
-        test1.add(a);
-        test.setData(test1);
-        producer.sendMessage(test);
+        Hamster tom = new Hamster(1, "Thomas", 1.0);
+        Hamster theo = new Hamster(2, "Theodore", 2.0);
+        Hamster black = new Hamster(3, "Blackwood", 3.0);
+        producer.sendMessage(tom);
+        producer.sendMessage(theo);
+        producer.sendMessage(black);
     }
 }
