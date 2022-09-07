@@ -15,7 +15,6 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableScheduling
-
 public class ProducerApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(ProducerApplication.class, args);

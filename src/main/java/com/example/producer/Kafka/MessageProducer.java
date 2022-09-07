@@ -1,6 +1,5 @@
 package com.example.producer.Kafka;
 
-import DTO.Data;
 import Model.Hamster;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
