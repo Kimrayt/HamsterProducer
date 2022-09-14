@@ -1,6 +1,8 @@
 package com.example.producer.Kafka;
 
 import Model.Hamster;
+import com.mysql.cj.xdevapi.JsonString;
+import org.bson.json.JsonObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -21,7 +23,7 @@ public class KafkaProducerConfig {
     private String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, Hamster> producerFactory() {
+    public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -31,7 +33,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, Hamster> kafkaTemplate() {
+    public KafkaTemplate<String, String> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

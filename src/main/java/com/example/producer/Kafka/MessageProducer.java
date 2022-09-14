@@ -1,7 +1,9 @@
 package com.example.producer.Kafka;
 
 import Model.Hamster;
+import com.mysql.cj.xdevapi.JsonString;
 import lombok.NoArgsConstructor;
+import org.bson.json.JsonObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import lombok.extern.slf4j.Slf4j;
@@ -18,22 +20,20 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 public class MessageProducer {
 
     @Autowired
-    private KafkaTemplate<String, Hamster> kafkaTemplate;
-    @Value(value = "${kafka.topic.name}")
-    private String topicName;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
 
-    public void sendMessage(Hamster hamster) {
-        ListenableFuture<SendResult<String, Hamster>> future = kafkaTemplate.send(topicName, hamster);
+    public void sendMessage(String topicName,String hamster) {
+        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName, hamster);
 
-        future.addCallback(new ListenableFutureCallback<SendResult<String, Hamster>>() {
+        future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
             @Override
             public void onFailure(Throwable throwable) {
                 log.error("Unable to send message = {} dut to: {}", hamster, throwable.getMessage());
             }
 
             @Override
-            public void onSuccess(SendResult<String, Hamster> stringDataSendResult) {
+            public void onSuccess(SendResult<String, String> stringDataSendResult) {
                 log.info("Sent Message = {} with offset = {}", hamster, stringDataSendResult.getRecordMetadata().offset());
             }
         });
