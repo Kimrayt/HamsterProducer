@@ -1,8 +1,5 @@
 package com.example.producer.Kafka;
 
-import Model.Hamster;
-import com.mysql.cj.xdevapi.JsonString;
-import org.bson.json.JsonObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.apache.kafka.clients.producer.ProducerConfig;
