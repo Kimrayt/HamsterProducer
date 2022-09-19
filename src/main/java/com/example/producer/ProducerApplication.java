@@ -20,9 +20,8 @@ public class ProducerApplication {
 
         MessageProducer producer = context.getBean(MessageProducer.class);
 
-
         Resource resource = new ClassPathResource("kafkaTest.json");
         String jsonHamsterItem = FileUtils.readFileToString(resource.getFile(), StandardCharsets.UTF_8);
-        producer.sendMessage("SaveHamsters", jsonHamsterItem);
+        producer.sendMessage("GetAllHamsters", "2");
     }
 }
